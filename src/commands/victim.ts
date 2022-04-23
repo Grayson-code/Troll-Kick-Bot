@@ -21,7 +21,7 @@ export class Victim extends Command {
         await mongoose.connect(process.env.Mongoose!);
         const victimUser = message.mentions.members!.first();
         if (!victimUser == null) return;
-        const find = await victim.findOne({ _id: victimUser!.id, guildId: message.guild!.id })!;
+        const find = await victim.findOne({ id: victimUser!.id, guildId: message.guild!.id })!;
         if (find) {
           return message.reply('brother that guy is already in our hitlist')
         };

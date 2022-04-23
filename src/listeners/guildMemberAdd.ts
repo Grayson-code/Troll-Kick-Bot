@@ -20,7 +20,7 @@ export class GuildMemberAddListener extends Listener {
         
         
         await mongoose.connect(process.env.Mongoose!);
-        const find = await victim.findOne({ _id: member.id, guildId: member.guild.id! })!;
+        const find = await victim.findOne({ id: member.id, guildId: member.guild.id! })!;
         if (member.user.bot) return;
         if (find == null) return;
         if (member.id === find._id) {
