@@ -34,7 +34,12 @@ export class GuildMemberAddListener extends Listener {
             } catch (e) {
                 console.log('well i kicked someone but that guy was planned and turned off his dms to protect himself from me.');
             }
-            await member.kick('victim');
+            try {
+                await member.kick('victim'); 
+            } catch (e) {
+                console.error(e);
+            }
+
         }
         return mongoose.connection.close();
     };

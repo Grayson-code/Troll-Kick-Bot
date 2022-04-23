@@ -13,7 +13,9 @@ export class Victim extends Command {
         super(context, {
             ...options,
             name: 'victim',
-            description: 'kicks the victim without mercy' 
+            description: 'kicks the victim without mercy',
+            requiredUserPermissions: ['KICK_MEMBERS'],
+            requiredClientPermissions: ['KICK_MEMBERS'],
         })
     };
 
