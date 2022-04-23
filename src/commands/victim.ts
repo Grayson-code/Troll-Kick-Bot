@@ -36,6 +36,7 @@ export class Victim extends Command {
             console.error(e)
         } finally {
             mongoose.connection.close()
+            message.reply('brother added to hitlist will put out bounty stickers on him around town')
         }
     }
 }
