@@ -7,6 +7,7 @@ import { Command } from "@sapphire/framework";
 import { Message } from "discord.js";
 import mongoose from "mongoose";
 import { victim } from "../schema/victim";
+import messages from "../message.json";
 
 export class Victim extends Command {
     public constructor(context: Command.Context, options: Command.Options) {
@@ -25,18 +26,20 @@ export class Victim extends Command {
         if (!victimUser == null) return;
         const find = await victim.findOne({ id: victimUser!.id, guildId: message.guild!.id })!;
         if (find) {
-          return message.reply('brother that guy is already in our hitlist')
+            return message.reply('brother that guy is already in our hitlist')
         };
         try {
-            await new victim({ 
+            await new victim({
                 _id: victimUser?.id,
                 guildId: message.guild?.id
-             }).save();
-        } catch(e) {
+            }).save();
+        } catch (e) {
             console.error(e)
         } finally {
+            const arrayNum = Math.floor((Math.random() * 10) + 0);
+
             mongoose.connection.close()
-            message.reply('brother added to hitlist will put out bounty stickers on him around town')
+            message.reply(messages.commandMessage[arrayNum])
         }
     }
 }
