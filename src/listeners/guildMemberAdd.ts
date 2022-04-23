@@ -8,6 +8,7 @@ import type { GuildMember } from "discord.js";
 import { Scripts } from "../scripts/main";
 import mongoose from "mongoose";
 import { victim } from "../schema/victim";
+import message from '../message.json'
 
 export class GuildMemberAddListener extends Listener {
     public constructor(context: Listener.Context, options: Listener.Options) {
@@ -26,7 +27,9 @@ export class GuildMemberAddListener extends Listener {
         if (member.id === find._id) {
             await Scripts.sleep(10000);
             try {
-                await member.send('get good');
+                const arrayNum = Math.floor((Math.random() * 10) + 0);
+
+                await member.send(message.kickMessage[arrayNum]);
                 console.info(`Victim ${member.user.tag} (${member.user.id}) joined ${member.guild.name} and has been kicked kek`);
             } catch (e) {
                 console.log('well i kicked someone but that guy was planned and turned off his dms to protect himself from me.');

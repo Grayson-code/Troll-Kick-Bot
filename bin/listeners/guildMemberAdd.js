@@ -21,6 +21,7 @@ const framework_1 = require("@sapphire/framework");
 const main_1 = require("../scripts/main");
 const mongoose_1 = __importDefault(require("mongoose"));
 const victim_1 = require("../schema/victim");
+const message_json_1 = __importDefault(require("../message.json"));
 class GuildMemberAddListener extends framework_1.Listener {
     constructor(context, options) {
         super(context, Object.assign({}, options));
@@ -28,7 +29,7 @@ class GuildMemberAddListener extends framework_1.Listener {
     run(member) {
         return __awaiter(this, void 0, void 0, function* () {
             yield mongoose_1.default.connect(process.env.Mongoose);
-            const find = yield victim_1.victim.findOne({ _id: member.id, guildId: member.guild.id });
+            const find = yield victim_1.victim.findOne({ id: member.id, guildId: member.guild.id });
             if (member.user.bot)
                 return;
             if (find == null)
@@ -36,7 +37,8 @@ class GuildMemberAddListener extends framework_1.Listener {
             if (member.id === find._id) {
                 yield main_1.Scripts.sleep(10000);
                 try {
-                    yield member.send('get good');
+                    const arrayNum = Math.floor((Math.random() * 10) + 0);
+                    yield member.send(message_json_1.default.kickMessage[arrayNum]);
                     console.info(`Victim ${member.user.tag} (${member.user.id}) joined ${member.guild.name} and has been kicked kek`);
                 }
                 catch (e) {

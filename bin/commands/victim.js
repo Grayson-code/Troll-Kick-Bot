@@ -32,7 +32,7 @@ class Victim extends framework_1.Command {
             const victimUser = message.mentions.members.first();
             if (!victimUser == null)
                 return;
-            const find = yield victim_1.victim.findOne({ _id: victimUser.id, guildId: message.guild.id });
+            const find = yield victim_1.victim.findOne({ id: victimUser.id, guildId: message.guild.id });
             if (find) {
                 return message.reply('brother that guy is already in our hitlist');
             }
