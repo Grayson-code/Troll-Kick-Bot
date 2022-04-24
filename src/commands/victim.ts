@@ -17,6 +17,7 @@ export class Victim extends Command {
             description: 'kicks the victim without mercy',
             requiredUserPermissions: ['KICK_MEMBERS'],
             requiredClientPermissions: ['KICK_MEMBERS'],
+            
         })
     };
 
